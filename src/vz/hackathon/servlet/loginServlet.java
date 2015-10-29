@@ -1,9 +1,10 @@
-package vz.hackathon.servlets;
+package vz.hackathon.servlet;
 
 
 import java.io.IOException;
 import java.sql.*;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginServlet
  */
-public class LoginServlet extends HttpServlet {
+@WebServlet("/loginServlet")
+public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     
@@ -35,7 +37,9 @@ public class LoginServlet extends HttpServlet {
 		    rs.next();
 		    if(rs.getString("role")=="Employee")
 		    {
-		    	response.sendRedirect("pages/dashboard.html");
+		    	System.out.println("here");
+		    	response.sendRedirect("pages/dashboard.jsp");
+		    	
 		    }
 		    else
 		    {

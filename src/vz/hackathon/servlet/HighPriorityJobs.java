@@ -1,4 +1,4 @@
-package vz.hackathon.servlets;
+package vz.hackathon.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
