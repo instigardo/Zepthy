@@ -1,5 +1,6 @@
   <!DOCTYPE html>
-  <html lang="en">
+  <%@page import="vz.hackathon.helper.SQLHelper"%>
+<html lang="en">
   
   <head>
   
@@ -167,7 +168,13 @@
                   <!-- /.row -->
                <div class="row">
                   <div class="col-lg-12" id="team">
-  <!-- team load -->
+  						<% 
+  							SQLHelper sqlhelp=new SQLHelper();
+  						
+  						
+  						
+  						
+  						%>
                   </div>
               </div>
               <!-- /.container-fluid -->
