@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
+import vz.hackathon.helper.Identifier;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -28,6 +30,8 @@ public class loginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	Identifier iden= new Identifier();
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		int emp_id=Integer.parseInt(request.getParameter("id"));
@@ -57,6 +61,8 @@ public class loginServlet extends HttpServlet {
 		    else
 		    {
 		    	// Employee Dashboard
+		    	iden.setId(emp_id+"");
+		    	response.sendRedirect("pages/Empdashboard.jsp");
 		    }
 	 
 		

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="javax.websocket.Session"%>
+<%@page import="vz.hackathon.helper.Identifier"%>
 <html lang="en">
 
 <head>
@@ -52,7 +52,7 @@
 
 </head>
 
-<body >
+<body>
 
     <div id="wrapper" >
 
@@ -168,28 +168,34 @@
             <div class="row">
             
                         <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-3">
 
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Team Status Summary
+                            <i class="fa fa-bar-chart-o fa-fw"></i> My Status Summary
                                    <div id="show">
             </div>
  </div>
- <% MorrisPopulator pMorris=new MorrisPopulator(); %>
+ <% MorrisPopulator pMorris=new MorrisPopulator(); 
+ Identifier identy=new Identifier();
+ 	String asd="";
+ 	String id;
+ 	if(asd.equals(""))
+ 		id=identy.getId(); 
+ 	else
+ 		{asd=request.getParameter("empid");
+ 		id=asd;
+ 		}
+ 		%>
+ 
                         <div class="panel-body" id="donut">
                         <script type="text/javascript">
-						<% String empid=session.getAttribute("emp_id").toString();%>
-						
-						
-						
-                        
                         $(function() {
-						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(empid) %>';
-                    	var taskProgress='<%=pMorris.morrisDataTaskPending(empid) %>';
-                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(empid) %>';
-                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(empid) %>';
+						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(id) %>';
+                    	var taskProgress='<%=pMorris.morrisDataTaskPending(id) %>';
+                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(id) %>';
+                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(id) %>';
                     	Morris.Donut({
                             element: 'morris-donut-chart',
                             data: [{
