@@ -1,20 +1,20 @@
-function populate() {
-//alert ('dcsdc');
-  var divTag = document.getElementById('priority_tasks');
-
-  var task='task job';
-  var assignee='worker';
-  var divContent='';
-  for(i=1; i<5; i++)
-	{
-divContent+=  '  <div class="list-group" ><i class="fa fa-comment fa-fw"></i>'+ task +
-  '<span class="pull-right text-muted small"><em>'+ assignee +'</em></span></div> ';
-	}
-divTag.innerHTML=divContent;
-
-
-
-}
+//function populate() {
+////alert ('dcsdc');
+//  var divTag = document.getElementById('priority_tasks');
+//
+//  var task='task job';
+//  var assignee='worker';
+//  var divContent='';
+//  for(i=1; i<5; i++)
+//	{
+//divContent+=  '  <div class="list-group" ><i class="fa fa-comment fa-fw"></i>'+ task +
+//  '<span class="pull-right text-muted small"><em>'+ assignee +'</em></span></div> ';
+//	}
+//divTag.innerHTML=divContent;
+//
+//
+//
+//}
 
 function teamView(){
 	//alert('here');

@@ -88,7 +88,7 @@ public class HighPriorityJobs extends HttpServlet {
 			{
 			 divContent = divContent+ " <div class=\"list-group\">"
 			 		+ "<i class=\"fa fa-comment fa-fw\"></i> "+
-			  "<a href=\"\""+array_task.get(i)+"</a>"
+			  array_task.get(i)
 			 		+" <span class=\"pull-right text-muted small\"><em> "
 					 +array_emp.get(i)+
 					 " </em></span></div> ";
