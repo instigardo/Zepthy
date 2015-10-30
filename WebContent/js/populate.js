@@ -16,32 +16,32 @@
 //
 //}
 
-function teamView(){
-	//alert('here');
-	  var divTag = document.getElementById('team');
-	var ManagerDetails='manu';
-	var EmployeeDetails='dada';
-	
-	  var divContent=  '  <li style="list-style: none;">'+
-          '<div class="panel panel-default">'+
-      '<div class="panel-heading">'+
-           '<i class="fa-fw"></i>'+ ManagerDetails
-       +'</div>'+
-     '</div><ul>';
-	  
-       var divc='';
-	  for(i=0; i<5; i++){
-	  divc+=
-    	    	'<li style="list-style: none;">'
-    +' <div class="panel panel-default">'
-     +' <div class="panel-heading">'
-    +  '     <i class="fa-fw"></i>'+  EmployeeDetails
-     + ' </div>'
-    + '</div>'
-      +'  </li>';
-	  
-}
-	  divContent+=divc+ ' </ul>   </li> ';
-
-	divTag.innerHTML=divContent;
-}
+//function teamView(){
+//	//alert('here');
+//	  var divTag = document.getElementById('team');
+//	var ManagerDetails='manu';
+//	var EmployeeDetails='dada';
+//	
+//	  var divContent=  '  <li style="list-style: none;">'+
+//          '<div class="panel panel-default">'+
+//      '<div class="panel-heading">'+
+//           '<i class="fa-fw"></i>'+ ManagerDetails
+//       +'</div>'+
+//     '</div><ul>';
+//	  
+//       var divc='';
+//	  for(i=0; i<5; i++){
+//	  divc+=
+//    	    	'<li style="list-style: none;">'
+//    +' <div class="panel panel-default">'
+//     +' <div class="panel-heading">'
+//    +  '     <i class="fa-fw"></i>'+  EmployeeDetails
+//     + ' </div>'
+//    + '</div>'
+//      +'  </li>';
+//	  
+//}
+//	  divContent+=divc+ ' </ul>   </li> ';
+//
+//	divTag.innerHTML=divContent;
+//}

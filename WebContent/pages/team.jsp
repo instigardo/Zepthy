@@ -1,5 +1,9 @@
   <!DOCTYPE html>
-  <%@page import="vz.hackathon.helper.SQLHelper"%>
+  <%@page import="java.io.PrintWriter"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="vz.hackathon.helper.SQLHelper"%>
+  <%@page import="vz.hackathon.logic.TeamView"%>
+  <%@page import="java.sql.*"%>
 <html lang="en">
   
   <head>
@@ -11,6 +15,62 @@
       <meta name="author" content="">
   
       <title>Zepthy</title>
+  
+  	<script>
+  	
+  	<% 
+  	String emp_id=(session.getAttribute("emp_id").toString());
+  	
+  	Class.forName("oracle.jdbc.driver.OracleDriver");
+    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","pass");
+    System.out.println("Connection Successful!");
+    Statement stmt = conn.createStatement();
+    Statement stmt2 = conn.createStatement();
+    ResultSet rs=stmt.executeQuery("select name from employee where manager_id = " + emp_id);
+    
+   
+    
+    ArrayList<String> emps=new ArrayList<String>();
+    String emp_name="";
+    while(rs.next())
+    {	
+
+    	emp_name=rs.getString("name");
+    	emps.add(emp_name);	
+    }
+  	
+    ResultSet rs2=stmt2.executeQuery("select name from employee where emp_id = " + emp_id);
+    String manager_name="";
+    while(rs2.next())
+    manager_name=rs2.getString("name");
+  	
+  	String divContent="  <li style=\"list-style: none;\">"+
+            "<div class=\"panel panel-default\">"+
+        "<div class=\"panel-heading\">"+
+             "<i class=\"fa-fw\"></i>"+ manager_name
+         +"</div>"+
+       "</div><ul>";
+       String divc="";
+   	  for(int i=0; i<emps.size(); i++){
+   	  divc+=
+       	    	"<li style=\"list-style: none;\">"
+       +" <div class=\"panel panel-default\">"
+        +" <div class=\"panel-heading\">"
+       +  "     <i class=\"fa-fw\"></i>"+  emps.get(i)
+        + " </div>"
+       + "</div>"
+         +"  </li>";
+   	  }
+  	  divContent+=divc+ " </ul>   </li> ";
+       System.out.println(divContent);
+  	%>
+  	function teamView(){
+  		//alert('here');
+  	  var divTag = document.getElementById('team');
+
+  	divTag.innerHTML=<%= divContent %>;
+  	</script>
+  
   
       <!-- Bootstrap Core CSS -->
       <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +99,7 @@
   
   </head>
   
-  <body onload="teamView()">
+  <body >
   
       <div id="wrapper">
   
@@ -170,7 +230,7 @@
                   <div class="col-lg-12" id="team">
   						<% 
   						
-  						
+  						out.print(divContent);
   						
   						%>
                   </div>
