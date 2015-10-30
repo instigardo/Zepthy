@@ -31,6 +31,7 @@ public class HighPriorityJobs extends HttpServlet {
 			}
 	ArrayList<String> array_emp=new ArrayList<String>();
     ArrayList<String> array_task=new ArrayList<String>();
+    ArrayList<String> array_empid=new ArrayList<String>();
     public String ret1()
     {
     	return "1";
@@ -42,7 +43,7 @@ public class HighPriorityJobs extends HttpServlet {
     
     public String find()
     {
-    	
+    	int task_id=0;
 		try
 		{
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -51,11 +52,12 @@ public class HighPriorityJobs extends HttpServlet {
 	    Statement stmt = conn.createStatement();
 	    ResultSet rs=stmt.executeQuery("select * from task where priority=3");
 	    String divContent="";
+	    
 	    while(rs.next())
 	    {
 	    	String task_name=rs.getString("name");
 	    	//String task_id=rs.getString("task_id");
-	    	int task_id=Integer.parseInt(rs.getString("task_id"));
+	    	task_id=Integer.parseInt(rs.getString("task_id"));
 	    	// 	Class.forName("oracle.jdbc.driver.OracleDriver");
 		    //Connection conn1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","pass");
 		    
@@ -74,7 +76,7 @@ public class HighPriorityJobs extends HttpServlet {
 		    
 		    array_task.add(task_name);
 		    array_emp.add(emp_name);
-		    
+		    array_empid.add(emp_id+"");
 		    //Response the Things here 
 		}
 	}
@@ -84,13 +86,14 @@ public class HighPriorityJobs extends HttpServlet {
 	}
 		int i=0;
 		String divContent="";
-		 while(i<array_emp.size()) 
+		 
+		while(i<array_emp.size()) 
 			{
 			 divContent = divContent+ " <div class=\"list-group\">"
 			 		+ "<i class=\"fa fa-comment fa-fw\"></i> "+
-			  array_task.get(i)
+"<a href=\"taskdetails.jsp?taskid="+task_id+"\" >"			 + "<p id=>"+task_id+"</p>" +"  "+ array_task.get(i) + " </a> "
 			 		+" <span class=\"pull-right text-muted small\"><em> "
-					 +array_emp.get(i)+
+					+ "<a href=\"Empdashboard.jsp?empid="+array_empid.get(i)+"\" > " +array_emp.get(i)+"<\\a> "+
 					 " </em></span></div> ";
 			 i++;
 			}
@@ -98,6 +101,9 @@ public class HighPriorityJobs extends HttpServlet {
 		System.out.println(divContent);
 		return divContent;
 
+    }
+    public void retID(String task_id){
+    	System.out.println("here motherfucker!!!");
     }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
