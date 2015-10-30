@@ -27,6 +27,7 @@ public class loginServlet extends HttpServlet {
 	{
 		int emp_id=Integer.parseInt(request.getParameter("id"));
 		String password=request.getParameter("password");
+		System.out.println("fucking here");
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -35,7 +36,8 @@ public class loginServlet extends HttpServlet {
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs=stmt.executeQuery("select * from employee where emp_id = " + emp_id + "and password = '" + password + "'");
 		    rs.next();
-		    if(rs.getString("role")=="Employee")
+		    String role=rs.getString("role");
+		    if(role.equals("Employee"))
 		    {
 		    	System.out.println("here");
 		    	response.sendRedirect("pages/dashboard.jsp");

@@ -54,6 +54,7 @@ public class HighPriorityJobs extends HttpServlet {
 	    while(rs.next())
 	    {
 	    	String task_name=rs.getString("name");
+	    	//String task_id=rs.getString("task_id");
 	    	int task_id=Integer.parseInt(rs.getString("task_id"));
 	    	// 	Class.forName("oracle.jdbc.driver.OracleDriver");
 		    //Connection conn1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","pass");

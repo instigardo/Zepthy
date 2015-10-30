@@ -169,8 +169,6 @@
                <div class="row">
                   <div class="col-lg-12" id="team">
   						<% 
-  							SQLHelper sqlhelp=new SQLHelper();
-  						
   						
   						
   						
