@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="vz.hackathon.helper.SQLHelper"%>
 <%@page import="vz.hackathon.logic.EmployeeInfo"%>
 <%@page import="vz.hackathon.helper.Identifier"%>
 <html lang="en">
@@ -21,6 +22,13 @@
 
     <!-- Timeline CSS -->
     <link href="../dist/css/timeline.css" rel="stylesheet">
+    
+        <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -181,7 +189,7 @@
  		%>
  		
             <div class="row">
-             <div class="col-lg-3" >
+             <div class="col-lg-3"  style="float: left;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-info  fa-fw"></i> My Info
@@ -199,10 +207,12 @@
                         <!-- /.panel-body -->
                     </div>
 
-                    <!-- /.panel .chat-panel -->
+                    <!-- /.panel .chat-panel --
                 </div>
-                        <div class="row">
-                <div class="col-lg-3">
+
+                                <!-- pie  --
+                
+                <div class="col-lg-3" style="float: left;">
 
                     <!-- /.panel -->
                     <div class="panel panel-default">
@@ -250,6 +260,63 @@
                         
 
                 </div>
+                <!-- /.pie  -->
+               
+                <!-- Employee task table -->
+                
+                                <div class="col-lg-9" style="float: right;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            DataTables Advanced Tables
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Task Name</th>
+                                            <th>Task Id</th>
+                                            <th>Assigned On</th>
+                                            <th>Deadline</th>
+                                            <th>Priority</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% 
+                                    String taskId="";
+                                    	SQLHelper help=new SQLHelper();
+                                    	ResultSet rsbucket=help.SELECT("bucket", "task_id", "emp_id="+id);
+                                    	help.SELECT("task", "*", "taskid="+taskId);
+                                    	
+                                    	
+                                    %>
+                                        <tr>
+                                            <td>Trident</td>
+                                            <td>Internet Explorer 4.0</td>
+                                            <td>Win 95+</td>
+                                            <td class="center">5</td>
+                                            <td class="center">X</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+ 
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+                
+                
+                
+                <!--  /.Employee task table -->
+              <!--   </div>
+                <div class="row"> -->
+                        
+                
                 <!-- /.col-lg-8 -->
                
                 <!-- /.col-lg-4 -->
@@ -273,6 +340,21 @@
     <script src="../bower_components/raphael/raphael-min.js"></script>
     <script src="../bower_components/morrisjs/morris.min.js"></script>
     <script src="../js/morris-data.js"></script>
+   
+
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+    </script>
+    
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>

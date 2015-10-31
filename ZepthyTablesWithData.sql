@@ -8,7 +8,8 @@
   CREATE TABLE "HR"."BUCKET" 
    (	"EMP_ID" NUMBER, 
 	"TASK_ID" NUMBER, 
-	"STATUS" VARCHAR2(1 BYTE)
+	"STATUS" VARCHAR2(1 BYTE), 
+	"MANAGER_ID" NUMBER
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -53,7 +54,7 @@
    (	"NAME" VARCHAR2(20 BYTE), 
 	"TASK_ID" NUMBER, 
 	"DESCRIPTION" VARCHAR2(250 BYTE), 
-	"DATE_CREATED" DATE, 
+	"DATE_CREATED" TIMESTAMP (0), 
 	"DEADLINE" DATE, 
 	"CONCERNS" VARCHAR2(250 BYTE), 
 	"SKILL_SET_REQUIRED" VARCHAR2(100 BYTE), 
@@ -66,37 +67,37 @@
   TABLESPACE "USERS" ;
 REM INSERTING into HR.BUCKET
 SET DEFINE OFF;
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1001,101,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1260,102,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1540,103,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1856,104,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1406,105,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1002,106,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1856,107,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1734,108,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1442,109,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1908,110,'F');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1872,111,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1001,112,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1260,113,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1540,114,'R');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1872,115,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1406,116,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1002,117,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1856,118,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1734,119,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1442,120,'F');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1908,121,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1260,122,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1001,123,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1260,124,'R');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1540,125,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1872,126,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1406,127,'C');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1002,128,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1856,129,'P');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1734,130,'F');
-Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS) values (1442,131,'C');
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1001,101,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1260,102,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1540,103,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (2001,104,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1406,105,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1002,106,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1856,107,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1734,108,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1442,109,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1908,110,'F',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1872,111,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1001,112,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1260,113,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1540,114,'R',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1872,115,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1406,116,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1002,117,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1856,118,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1734,119,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1442,120,'F',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1908,121,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1260,122,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1001,123,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1260,124,'R',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1540,125,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1872,126,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1406,127,'C',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1002,128,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1856,129,'P',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1734,130,'F',2001);
+Insert into HR.BUCKET (EMP_ID,TASK_ID,STATUS,MANAGER_ID) values (1442,131,'C',2001);
 REM INSERTING into HR.EMPLOYEE
 SET DEFINE OFF;
 Insert into HR.EMPLOYEE (EMP_ID,NAME,HOURS_COMPLETED,HOURS_REMAINING,ELEVATION,PASSWORD,ROLE,COMMENTS,MANAGER_ID) values (1001,'Akash Philip',10,30,0,'akash','Employee',null,2001);
@@ -149,37 +150,38 @@ Insert into HR.SKILL_SET (EMP_ID,SKILL) values (1388,'CSS, DotNET');
 Insert into HR.SKILL_SET (EMP_ID,SKILL) values (1196,'PHP, HTML, Teradata');
 REM INSERTING into HR.TASK
 SET DEFINE OFF;
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Write Web',101,'write Web',to_date('26-OCT-93','DD-MON-RR'),to_date('27-OCT-12','DD-MON-RR'),'philipakash@yahoo.com','HTML',120,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',102,'Task assigned to employee',to_date('03-DEC-14','DD-MON-RR'),to_date('06-APR-16','DD-MON-RR'),'helpdesk@zepthy.com','CSS',2,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',103,'Task assigned to employee',to_date('29-NOV-14','DD-MON-RR'),to_date('22-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',1,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',104,'Task assigned to employee',to_date('27-DEC-14','DD-MON-RR'),to_date('14-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',8,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',105,'Task assigned to employee',to_date('13-NOV-14','DD-MON-RR'),to_date('02-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',5,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',106,'Task assigned to employee',to_date('20-MAY-15','DD-MON-RR'),to_date('09-DEC-15','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',1,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',107,'Task assigned to employee',to_date('12-APR-15','DD-MON-RR'),to_date('09-SEP-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',2,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',108,'Task assigned to employee',to_date('13-FEB-15','DD-MON-RR'),to_date('22-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',9,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',109,'Task assigned to employee',to_date('08-OCT-15','DD-MON-RR'),to_date('27-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',1,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Maintenance',110,'Task assigned to employee',to_date('06-JAN-15','DD-MON-RR'),to_date('05-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',9,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Automation',111,'Task assigned to employee',to_date('22-MAY-15','DD-MON-RR'),to_date('18-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',1,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Generate Reports',112,'Task assigned to employee',to_date('20-SEP-15','DD-MON-RR'),to_date('10-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','PHP',10,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',113,'Task assigned to employee',to_date('16-DEC-14','DD-MON-RR'),to_date('16-JAN-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',8,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',114,'Task assigned to employee',to_date('04-SEP-15','DD-MON-RR'),to_date('18-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',7,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Troubleshooting',115,'Task assigned to employee',to_date('03-DEC-14','DD-MON-RR'),to_date('01-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',3,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',116,'Task assigned to employee',to_date('04-JAN-15','DD-MON-RR'),to_date('10-JUL-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',6,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',117,'Task assigned to employee',to_date('12-APR-15','DD-MON-RR'),to_date('06-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','CSS',2,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Troubleshooting',118,'Task assigned to employee',to_date('04-DEC-14','DD-MON-RR'),to_date('13-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',8,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',119,'Task assigned to employee',to_date('09-MAR-15','DD-MON-RR'),to_date('03-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',8,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',120,'Task assigned to employee',to_date('13-MAY-15','DD-MON-RR'),to_date('19-JUL-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',3,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',121,'Task assigned to employee',to_date('16-NOV-14','DD-MON-RR'),to_date('16-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',5,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Programming',122,'Task assigned to employee',to_date('17-MAY-15','DD-MON-RR'),to_date('05-APR-16','DD-MON-RR'),'helpdesk@zepthy.com','CSS',3,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Maintenance',123,'Task assigned to employee',to_date('31-MAY-15','DD-MON-RR'),to_date('27-MAR-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',6,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Programming',124,'Task assigned to employee',to_date('01-MAR-15','DD-MON-RR'),to_date('15-JAN-16','DD-MON-RR'),'helpdesk@zepthy.com','PHP',9,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Automation',125,'Task assigned to employee',to_date('08-FEB-15','DD-MON-RR'),to_date('08-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',3,3);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',126,'Task assigned to employee',to_date('05-MAR-15','DD-MON-RR'),to_date('06-MAR-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',3,1);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',127,'Task assigned to employee',to_date('22-OCT-15','DD-MON-RR'),to_date('12-SEP-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',5,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',128,'Task assigned to employee',to_date('05-AUG-15','DD-MON-RR'),to_date('19-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',9,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Generate Reports',129,'Task assigned to employee',to_date('22-NOV-14','DD-MON-RR'),to_date('01-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',7,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',130,'Task assigned to employee',to_date('12-FEB-15','DD-MON-RR'),to_date('03-MAY-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',6,2);
-Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',131,'Task assigned to employee',to_date('07-AUG-15','DD-MON-RR'),to_date('14-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','Java',8,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Write Web',101,'write Web',to_timestamp('26-OCT-93 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('27-OCT-12','DD-MON-RR'),'philipakash@yahoo.com','HTML',120,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',102,'Task assigned to employee',to_timestamp('03-DEC-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('06-APR-16','DD-MON-RR'),'helpdesk@zepthy.com','CSS',2,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',103,'Task assigned to employee',to_timestamp('29-NOV-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('22-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',1,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',104,'Task assigned to employee',to_timestamp('27-DEC-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('14-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',8,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',105,'Task assigned to employee',to_timestamp('13-NOV-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('02-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',5,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',106,'Task assigned to employee',to_timestamp('20-MAY-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('09-DEC-15','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',1,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',107,'Task assigned to employee',to_timestamp('12-APR-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('09-SEP-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',2,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',108,'Task assigned to employee',to_timestamp('13-FEB-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('22-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',9,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',109,'Task assigned to employee',to_timestamp('08-OCT-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('27-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',1,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Maintenance',110,'Task assigned to employee',to_timestamp('06-JAN-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('05-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',9,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Automation',111,'Task assigned to employee',to_timestamp('22-MAY-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('18-FEB-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',1,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Generate Reports',112,'Task assigned to employee',to_timestamp('20-SEP-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('10-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','PHP',10,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',113,'Task assigned to employee',to_timestamp('16-DEC-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('16-JAN-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',8,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',114,'Task assigned to employee',to_timestamp('04-SEP-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('18-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',7,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Troubleshooting',115,'Task assigned to employee',to_timestamp('03-DEC-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('01-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',3,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',116,'Task assigned to employee',to_timestamp('04-JAN-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('10-JUL-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',6,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Performance Analysis',117,'Task assigned to employee',to_timestamp('12-APR-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('06-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','CSS',2,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Troubleshooting',118,'Task assigned to employee',to_timestamp('04-DEC-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('13-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',8,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',119,'Task assigned to employee',to_timestamp('09-MAR-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('03-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',8,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Database',120,'Task assigned to employee',to_timestamp('13-MAY-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('19-JUL-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',3,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',121,'Task assigned to employee',to_timestamp('16-NOV-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('16-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',5,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Programming',122,'Task assigned to employee',to_timestamp('17-MAY-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('05-APR-16','DD-MON-RR'),'helpdesk@zepthy.com','CSS',3,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Maintenance',123,'Task assigned to employee',to_timestamp('31-MAY-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('27-MAR-16','DD-MON-RR'),'helpdesk@zepthy.com','C++',6,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Programming',124,'Task assigned to employee',to_timestamp('01-MAR-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('15-JAN-16','DD-MON-RR'),'helpdesk@zepthy.com','PHP',9,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Automation',125,'Task assigned to employee',to_timestamp('08-FEB-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('08-AUG-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',3,3);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Bug Fixing',126,'Task assigned to employee',to_timestamp('05-MAR-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('06-MAR-16','DD-MON-RR'),'helpdesk@zepthy.com','DotNET',3,1);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',127,'Task assigned to employee',to_timestamp('22-OCT-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('12-SEP-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',5,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Designing',128,'Task assigned to employee',to_timestamp('05-AUG-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('19-JUN-16','DD-MON-RR'),'helpdesk@zepthy.com','Java',9,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Generate Reports',129,'Task assigned to employee',to_timestamp('22-NOV-14 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('01-OCT-16','DD-MON-RR'),'helpdesk@zepthy.com','Teradata',7,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Testing',130,'Task assigned to employee',to_timestamp('12-FEB-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('03-MAY-16','DD-MON-RR'),'helpdesk@zepthy.com','HTML',6,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('Query',131,'Task assigned to employee',to_timestamp('07-AUG-15 12.00.00.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('14-NOV-15','DD-MON-RR'),'helpdesk@zepthy.com','Java',8,2);
+Insert into HR.TASK (NAME,TASK_ID,DESCRIPTION,DATE_CREATED,DEADLINE,CONCERNS,SKILL_SET_REQUIRED,HOURS_NEEDED,PRIORITY) values ('sadsadsadsadsad',132,'ssadsadsads',to_timestamp('01-NOV-15 01.48.39.000000000 AM','DD-MON-RR HH.MI.SSXFF AM'),to_date('23-NOV-15','DD-MON-RR'),'sdasds@fdsads.cvd','null',43,2);
 --------------------------------------------------------
 --  DDL for Index EMPLOYEE_PK
 --------------------------------------------------------

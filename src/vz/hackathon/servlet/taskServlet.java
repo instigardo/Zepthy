@@ -57,7 +57,7 @@ public class taskServlet extends HttpServlet {
 		String skill=request.getParameter("skill");
 		String hours=request.getParameter("hours");
 		String priority=request.getParameter("priority");
-		sqlhelp.INSERT("task", "'"+ taskName+"','"+"tsk132"+"','"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
+		sqlhelp.INSERT("task", "'"+ taskName+"','"+"132"+"','"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
 		ResultSet rs=sqlhelp.query("select task_id from task order by date_created desc");
 		try {
 				rs.next();
