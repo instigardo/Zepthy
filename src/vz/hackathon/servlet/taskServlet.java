@@ -13,8 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import vz.hackathon.helper.SQLHelper;
+import vz.hackathon.logic.TaskManagement;
 
 /**
  * Servlet implementation class taskServlet
@@ -39,12 +41,21 @@ public class taskServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    HttpServletRequest request;
+
     SQLHelper sqlhelp=new SQLHelper();
+
+
+    
 	static String id="";
+	
+	HttpSession session=request.getSession();
+
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String taskName=request.getParameter("taskName");
 		String taskDesc=request.getParameter("taskDesc");
@@ -71,9 +82,18 @@ public class taskServlet extends HttpServlet {
 		}
 		if(assignment.equals("automatic")){
 			System.out.println("id");
+			HttpSession session =request.getSession();
+			TaskManagement.automateManagement(id,concerns,skill,hours,priority,dated,datered, (String)session.getAttribute("emp_id"));
 		}
 		else if(assignment.equals("manual")){
 			System.out.println(assignee);
+			String managerId=session.getAttribute("emp_id").toString();
+
+			System.out.println(assignee);
+
+			sqlhelp.INSERT("bucket", "'"+assignee+"','"+id+"','P','"+assignee+"','"+managerId+"'");
+
+
 		}
 		response.sendRedirect("../hackathon/pages/dashboard.jsp");
 	}
