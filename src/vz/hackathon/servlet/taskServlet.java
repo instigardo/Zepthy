@@ -45,18 +45,12 @@ public class taskServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    HttpServletRequest request;
 
     SQLHelper sqlhelp=new SQLHelper();
+    static String id="";
 
-
-    
-	static String id="";
-	
-	HttpSession session=request.getSession();
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session =request.getSession();
 		String taskName=request.getParameter("taskName");
 		String taskDesc=request.getParameter("taskDesc");
 		String dated=request.getParameter("SelectedDate");
@@ -69,7 +63,7 @@ public class taskServlet extends HttpServlet {
 		String skill=request.getParameter("skill");
 		String hours=request.getParameter("hours");
 		String priority=request.getParameter("priority");
-		sqlhelp.INSERT("task", "'"+ taskName+"','"+"132"+"','"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
+		sqlhelp.INSERT("task", "'"+ taskName+"',"+"MY_NUMBER_SN.nextval"+",'"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
 		ResultSet rs=sqlhelp.query("select task_id from task order by date_created desc");
 		try {
 				rs.next();
@@ -82,8 +76,8 @@ public class taskServlet extends HttpServlet {
 		}
 		if(assignment.equals("automatic")){
 			System.out.println("id");
-			HttpSession session =request.getSession();
-			TaskManagement.automateManagement(id,concerns,skill,hours,priority,dated,datered, (String)session.getAttribute("emp_id"));
+			
+			TaskManagement.automateManagement(id,concerns,skill,hours,priority,dated,datered, session.getAttribute("emp_id").toString());
 		}
 		else if(assignment.equals("manual")){
 			System.out.println(assignee);
@@ -91,7 +85,7 @@ public class taskServlet extends HttpServlet {
 
 			System.out.println(assignee);
 
-			sqlhelp.INSERT("bucket", "'"+assignee+"','"+id+"','P','"+assignee+"','"+managerId+"'");
+			sqlhelp.INSERT("bucket", "'"+assignee+"','"+id+"','P','"+managerId+"'");
 
 
 		}
