@@ -35,10 +35,10 @@ public class MorrisPopulator extends HttpServlet {
 //    	String emp_id=session.getAttribute("emp_id").toString();
 	SQLHelper sqlhelp=new SQLHelper();
 
-    public int morrisDataTaskCompleted(String emp_id) throws SQLException
+    public int morrisDataTaskCompleted(String emp_id, String role) throws SQLException
     	{
     		
-    		ResultSet rs=sqlhelp.SELECT("bucket", "count(status)", "status='c' and emp_id='"+emp_id+"'");
+    		ResultSet rs=sqlhelp.SELECT("bucket", "count(status)", "status='C' and "+role+"='"+emp_id+"'");
     		int completed=0;
     		while(rs.next())
     		{
@@ -48,10 +48,10 @@ public class MorrisPopulator extends HttpServlet {
     		return completed;
     	}
 
-    	public int morrisDataTaskPending(String emp_id) throws SQLException
+    	public int morrisDataTaskPending(String emp_id, String role) throws SQLException
     	{
     		
-    		ResultSet rs1=sqlhelp.SELECT("bucket", "count(status)", "status='p' and emp_id='"+emp_id+"'");
+    		ResultSet rs1=sqlhelp.SELECT("bucket", "count(status)", "status='P' and "+role+"='"+emp_id+"'");
     		int pending=0;
     		while(rs1.next())
     		{
@@ -61,10 +61,10 @@ public class MorrisPopulator extends HttpServlet {
     		return pending;
     	}
 
-    	public int morrisDataTaskFailed(String emp_id) throws SQLException
+    	public int morrisDataTaskFailed(String emp_id, String role) throws SQLException
     	{
     		
-    		ResultSet rs2=sqlhelp.SELECT("bucket", "count(status)", "status='f' and emp_id='"+emp_id+"'");
+    		ResultSet rs2=sqlhelp.SELECT("bucket", "count(status)", "status='F' and "+role+"='"+emp_id+"'");
     		int failed=0;
     		while(rs2.next())
     		{
@@ -74,10 +74,10 @@ public class MorrisPopulator extends HttpServlet {
     		return failed;
     	}
 
-    	public int morrisDataTaskReassigned(String emp_id) throws SQLException
+    	public int morrisDataTaskReassigned(String emp_id, String role) throws SQLException
     	{
     		
-    		ResultSet rs3=sqlhelp.SELECT("bucket", "count(status)", "status='r' and emp_id='"+emp_id+"'");
+    		ResultSet rs3=sqlhelp.SELECT("bucket", "count(status)", "status='R' and "+role+"='"+emp_id+"'");
     		int reassigned=0;
     		while(rs3.next())
     		{

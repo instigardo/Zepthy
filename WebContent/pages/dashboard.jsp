@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="vz.hackathon.helper.Identifier"%>
 <%@page import="javax.websocket.Session"%>
 <html lang="en">
 
@@ -11,7 +12,8 @@
     <meta name="author" content="">
 
     <title>Zepthy</title>
-
+<!-- popup css -->
+	<link href="../dist/css/popup.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -177,19 +179,24 @@
                                    <div id="show">
             </div>
  </div>
- <% MorrisPopulator pMorris=new MorrisPopulator(); %>
+ <% MorrisPopulator pMorris=new MorrisPopulator(); 
+ 						
+ %>
                         <div class="panel-body" id="donut">
                         <script type="text/javascript">
-						<% String empid=session.getAttribute("emp_id").toString();%>
+						<% String managerId=session.getAttribute("emp_id").toString();
+						
+						
+						%>
 						
 						
 						
                         
                         $(function() {
-						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(empid) %>';
-                    	var taskProgress='<%=pMorris.morrisDataTaskPending(empid) %>';
-                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(empid) %>';
-                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(empid) %>';
+						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(managerId,"manager_id") %>';
+                    	var taskProgress='<%=pMorris.morrisDataTaskPending(managerId,"manager_id") %>';
+                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(managerId,"manager_id") %>';
+                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(managerId,"manager_id") %>';
                     	Morris.Donut({
                             element: 'morris-donut-chart',
                             data: [{
@@ -212,7 +219,8 @@
                         </script>
                         
                             <div id="morris-donut-chart"></div>
-						                         
+						           
+						                      
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -233,10 +241,10 @@
                             
                         <% HighPriorityJobs hpj=new HighPriorityJobs();  	%>
                           	<script>
-                          	alert('ello');
+                          	
                           	var a='<%=hpj.find()%>';
                           	
-                            alert(a);
+                            
                            document.getElementById("priority_tasks").innerHTML=a;
                           	</script>  
                           	
@@ -277,6 +285,46 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../js/populate.js"></script>
+    
+    <!-- popup scripts -->
+ 	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
+	<script src="../js/jquery.popup.js"></script>
+	<script>
+		$(function(){
+
+			/*-------------------------------
+
+				GENERAL EXAMPLES
+
+			-------------------------------*/
+
+			// Default usage
+			$('.default_popup').popup();
+
+
+
+		});
+
+		/*---------------------
+
+			JQUERY EASING
+
+		*/
+
+		$.extend($.easing, {
+			easeOutBack: function (x, t, b, c, d, s) {
+				if (s == undefined) s = 1.70158;
+				return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+			},
+			easeInBack: function (x, t, b, c, d, s) {
+				if (s == undefined) s = 1.70158;
+				return c*(t/=d)*t*((s+1)*t - s) + b;
+			}
+		});
+
+
+
+	</script>
 
 </body>
 

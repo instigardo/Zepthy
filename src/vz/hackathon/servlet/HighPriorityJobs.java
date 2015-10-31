@@ -108,9 +108,9 @@ public class HighPriorityJobs extends HttpServlet {
 			{
 			 divContent = divContent+ " <div class=\"list-group\">"
 			 		+ "<i class=\"fa fa-comment fa-fw\"></i> "+
-"<a href=\"taskdetails.jsp?taskid="+task_id+"\" >"			 + array_task.get(i) + " </a> "
+"<a href=\"http://localhost:8080/hackathon/pages/taskdetails.jsp?pw=500&amp;ph=300&amp;taskid="+task_id+"\" class=\"default_popup\">"			 + array_task.get(i) + " </a> "
 			 		+" <span class=\"pull-right text-muted small\"><em> "
-					+ "<a href=\"Empdashboard.jsp?empid="+array_empid.get(i)+"\" > " +array_emp.get(i)+"<\\a> "+
+					+ "<a href=\"http://localhost:8080/hackathon/pages/dashboard.jsp?pw=500&amp;ph=300&amp;empid="+array_empid.get(i)+"\" class=\"default_popup\"> " +array_emp.get(i)+"<\\a> "+
 					 " </em></span></div> ";
 			 i++;
 			}
