@@ -53,6 +53,7 @@ public class taskServlet extends HttpServlet {
 		String month[]={"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"};
 		String datered=dater[1]+"-"+month[Integer.parseInt(dater[0])-1]+"-"+dater[2];
 		String assignment=request.getParameter("assignment");
+		String assignee=request.getParameter("assignee");
 		String concerns=request.getParameter("concerns");
 		String skill=request.getParameter("skill");
 		String hours=request.getParameter("hours");
@@ -72,7 +73,7 @@ public class taskServlet extends HttpServlet {
 			System.out.println("id");
 		}
 		else if(assignment.equals("manual")){
-			System.out.println("id");
+			System.out.println(assignee);
 		}
 		response.sendRedirect("../hackathon/pages/dashboard.jsp");
 	}

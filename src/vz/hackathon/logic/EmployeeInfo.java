@@ -28,20 +28,36 @@ public class EmployeeInfo {
 		return info;
 	}
 	
-	public void task(String id) throws SQLException{
+	public String task(String id) throws SQLException{
 		String taskId="";
 		String name="";
 		Date created;
 		Date deadline;
 		int hoursReq=0;
 		int priority=0;
-		
+		String stat;
+		String status="";
+		String ret="";
 		
     	SQLHelper help=new SQLHelper();
-    	ResultSet rsbucket=help.SELECT("bucket", "task_id", "emp_id="+id);
+    	ResultSet rsbucket=help.SELECT("bucket", "task_id,status", "emp_id="+id);
     	while(rsbucket.next()){
     		taskId=rsbucket.getString("task_id");
-    		ResultSet rstask=help.SELECT("task", "*", "taskid="+taskId);
+    		stat=rsbucket.getString("status");
+    		switch(stat)
+    		{
+    		case "P":status="In Progress";
+    		break;
+    		case "C":status="Completed";
+    		break;
+    		case "R":status="Reassigned";
+    		break;
+    		case "F":status="Failed";
+    		break;
+    			
+    		}
+    		
+    		ResultSet rstask=help.SELECT("task", "*", "task_id="+taskId);
     		if(rstask.first()){
     			name=rstask.getString("name");
     			created=rstask.getDate("date_created");
@@ -49,7 +65,20 @@ public class EmployeeInfo {
     			hoursReq=rstask.getInt("hours_needed");
     			priority=rstask.getInt("priority");
     			
+                ret+="<tr>"
+                +"<td>"+name+"</td>"
+                +"<td>"+taskId+"</td>"
+                +"<td>"+created+"</td>"
+                +"<td>"+deadline+"</td>"
+                +"<td>"+priority+"</td>"
+                +"<td>"+hoursReq+"</td>"
+                +"<td>"+status+"</td>"
+                +"<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\"><i class=\"fa fa-check\"></i></button>"
+                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\">Elevate</i></button></td>"
+            +"</tr>";
+
     		}
 	}
+    	return ret;
 	}
 }

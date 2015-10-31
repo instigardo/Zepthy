@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<%@page import="vz.hackathon.helper.Identifier"%>
-<%@page import="javax.websocket.Session"%>
+<%@page import="vz.hackathon.servlet.taskCreate"%>
 <html lang="en">
 
 <head>
-<%@ page import="vz.hackathon.servlet.*" %>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,13 +11,16 @@
     <meta name="author" content="">
 
     <title>Zepthy</title>
-<!-- popup css -->
-	<link href="../dist/css/popup.css" rel="stylesheet">
+
+<!-- Popup -->
+<link href="../dist/css/popup.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<link href="../date/htmlDatePicker.css" rel="stylesheet" />
 
     <!-- Timeline CSS -->
     <link href="../dist/css/timeline.css" rel="stylesheet">
@@ -39,26 +41,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif] -->
 
-
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript"
-    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script>
-    $(document).ready(
-            function() {
-                setInterval(function() {
-                    var randomnumber = Math.floor(Math.random() * 100);
-                    //populate();
-                    //$('#morris-donut-chart').text;
-                }, 3000);
-            });
-</script>
-
 </head>
 
-<body >
-
+<body>
+<% taskCreate tc=new taskCreate(); 
+String emp_id=(session.getAttribute("emp_id").toString());
+  	%>
     <div id="wrapper" >
 
         <!-- Navigation -->
@@ -134,7 +122,7 @@
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
   		        <li class="divider"></li>
-                        <li><a href="index.html" ><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -153,114 +141,98 @@
                             <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
                         </li>
                         <li>
-                            <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Create Task</a>
                         </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
-            </div>
+           </div>
             <!-- /.navbar-static-side -->
         </nav>
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Create Task</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-            
-                        <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form" action="../taskServlet" method="post" id="tasker">
+                                        <div class="form-group">
+                                            <label>Task Name</label>
+                                            <input class="form-control" placeholder="Task Name" name="taskName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Task Description</label>
+                                            <textarea class="form-control" rows="3" name="taskDesc"></textarea>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label>Task Deadline</label>
+                                            <input type="text" name="SelectedDate" id="SelectedDate" readonly onClick="GetDate(this);" />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Concerns</label>
+                                            <textarea class="form-control" rows="3" name="concerns" placeholder="Input E-mail ids seperated by commas"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Assignment</label>
+                                            <select class="form-control" name="assignment" id="assign" onblur="checkAssignment()">
+                                                <option></option>
+                                                <option value="automatic">Automatic</option>
+                                                <option value="manual">Manual</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group" id="assignee">
+<!-- Assignee -->							
+                                        </div>
+
+
+                                        <div class="form-group" id="skillset">
+<!--  Skill Set  -->
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group">
+                                            <label>Hours Recommended per Week</label>
+                                            <input class="form-control" placeholder="Recommended hours" name="hours">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Priority Level</label>
+                                            <select class="form-control" name="priority">
+                                                <option></option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-default">Submit Button</button>
+                                        <button type="reset" class="btn btn-default">Reset Button</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Team Status Summary
-                                   <div id="show">
-            </div>
- </div>
- <% MorrisPopulator pMorris=new MorrisPopulator(); 
- 						
- %>
-                        <div class="panel-body" id="donut">
-                        <script type="text/javascript">
-						<% String managerId=session.getAttribute("emp_id").toString();
-						
-						
-						%>
-						
-						
-						
-                        
-                        $(function() {
-						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(managerId,"manager_id") %>';
-                    	var taskProgress='<%=pMorris.morrisDataTaskPending(managerId,"manager_id") %>';
-                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(managerId,"manager_id") %>';
-                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(managerId,"manager_id") %>';
-                    	Morris.Donut({
-                            element: 'morris-donut-chart',
-                            data: [{
-                                label: "Tasks Completed",
-                                value: taskCompleted
-                            }, {
-                                label: "Tasks in Progress",
-                                value: taskProgress
-                            }, {
-                                label: "Tasks Reassigned",
-                                value: taskReassigned
-                            }, {
-                                label: "Tasks Failed",
-                                value: taskFailed
-                            }],
-                            resize: true
-                        });
-					});
-                        
-                        </script>
-                        
-                            <div id="morris-donut-chart"></div>
-						           
-						                      
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-                        <div class="panel-body" hidden="hidden">
-                            <div id="morris-area-chart"></div>
-                        </div>
-
                 </div>
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4" >
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> High Priority Tasks
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" id="priority_tasks">
-                            
-                        <% HighPriorityJobs hpj=new HighPriorityJobs();  	%>
-                          	<script>
-                          	
-                          	var a='<%=hpj.find(managerId)%>';
-                          	
-                            
-                           document.getElementById("priority_tasks").innerHTML=a;
-                          	</script>  
-                          	
-                                   <!-- list tasks -->
-                            
-                            <!-- /.list-group -->
-                       </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-                    <!-- /.panel .chat-panel -->
-                </div>
-                <!-- /.col-lg-4 -->
+                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
         </div>
@@ -268,7 +240,47 @@
 
     </div>
     <!-- /#wrapper -->
+    
+<script type="text/javascript">
+function checkAssignment(){
+	var x=document.getElementById("tasker").assignment.value;
+	  var divTag = document.getElementById('assignee');
+	  var divTag2 = document.getElementById('skillset');
+	  var divContent='';
+	  var divContent2=''; 
+	  
+	if(x=="manual"){
+		divContent='<%= tc.filler(emp_id) %>';
 
+}
+	
+else if(x=="automatic")
+{
+	divContent='';
+	divContent2='<label>Skillset Required</label>'
++        '<div class="checkbox">'
+ +   '<label>'
+  +      '<input type="checkbox" name="skill" value="Mobile">Mobile'
+  +  '</label>'
++'</div>'
++'<div class="checkbox">'
+ +   '<label>'
+ +    '   <input type="checkbox" name="skill" value="FIOS">FIOS TV'
+ +   '</label>'
++'</div>'
++'<div class="checkbox">'
+ +'   <label>'
+ + '      <input type="checkbox" name="skill" value="4G">4G'
+ + '  </label>'
++'</div>';
+}
+divTag.innerHTML=divContent;
+divTag2.innerHTML=divContent2;
+
+}
+</script>
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -276,19 +288,13 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../bower_components/raphael/raphael-min.js"></script>
-    <script src="../bower_components/morrisjs/morris.min.js"></script>
-    <script src="../js/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../js/populate.js"></script>
-    
-    <!-- popup scripts -->
- 	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
+	<!-- Date Picker -->
+<script language="JavaScript" src="../date/htmlDatePicker.js" type="text/javascript"></script>
+
+	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
 	<script src="../js/jquery.popup.js"></script>
 	<script>
 		$(function(){
@@ -330,4 +336,3 @@
 </body>
 
 </html>
-

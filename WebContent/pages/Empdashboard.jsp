@@ -280,24 +280,17 @@
                                             <th>Assigned On</th>
                                             <th>Deadline</th>
                                             <th>Priority</th>
+                                            <th>Hours Recommended / week</th>
+                                             <th>Task Status</th>
+                                            <th>Update Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <% 
-                                    String taskId="";
-                                    	SQLHelper help=new SQLHelper();
-                                    	ResultSet rsbucket=help.SELECT("bucket", "task_id", "emp_id="+id);
-                                    	help.SELECT("task", "*", "taskid="+taskId);
-                                    	
+                                    String prnt=einfo.task(id);
+                                    	out.print(prnt);
                                     	
                                     %>
-                                        <tr>
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5</td>
-                                            <td class="center">X</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

@@ -207,7 +207,7 @@
                               <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
                           </li>
                           <li>
-                              <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Create Task</a>
+                              <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
                           </li>
                       </ul>
                   </div>
