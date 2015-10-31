@@ -54,7 +54,7 @@ public class loginServlet extends HttpServlet {
 		    if(role.equals("Manager"))
 		    {
 		    	// Manager Dashboard
-		    	
+		    	iden.setId(emp_id+"");
 		    	response.sendRedirect("pages/dashboard.jsp");
 		    	
 		    }

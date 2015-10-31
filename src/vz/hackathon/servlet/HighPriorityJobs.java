@@ -3,6 +3,7 @@ package vz.hackathon.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import vz.hackathon.helper.Identifier;
 
 /**
  * Servlet implementation class HighPriorityJobs
@@ -40,10 +44,11 @@ public class HighPriorityJobs extends HttpServlet {
     {
      return array_task;	
     }
-    
+    Identifier id = new Identifier();
     public String find()
     {
-    	int task_id=0;
+    	String emploginId=id.getId();
+    	String task_id="";
 		try
 		{
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -57,27 +62,39 @@ public class HighPriorityJobs extends HttpServlet {
 	    {
 	    	String task_name=rs.getString("name");
 	    	//String task_id=rs.getString("task_id");
-	    	task_id=Integer.parseInt(rs.getString("task_id"));
+	    	task_id=rs.getString("task_id");
 	    	// 	Class.forName("oracle.jdbc.driver.OracleDriver");
 		    //Connection conn1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","pass");
 		    
-		    Statement stmt1 = conn.createStatement();
-		    ResultSet rs1=stmt1.executeQuery("select emp_id from bucket where task_id="+task_id);
-		    rs1.next();
-		    int emp_id=Integer.parseInt(rs1.getString("emp_id"));
-		    
-		    Statement stmt2 = conn.createStatement();
-		    ResultSet rs2=stmt2.executeQuery("select name from employee where emp_id="+emp_id);
-		    rs2.next();
-		    String emp_name=(rs2.getString("name"));
-		    
+		    PreparedStatement stmt1 = conn.prepareStatement("select emp_id from bucket where task_id=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		    stmt1.setString(1, task_id);
+		    ResultSet rs1=stmt1.executeQuery();
+		    String emp_id="";
+		    if(rs1.first()){
+		    rs1.first();
+		    emp_id=rs1.getString("emp_id");
+		    //rs1=null;
+		    }
+		    PreparedStatement stmt2 = conn.prepareStatement("select name,manager_id from employee where emp_id=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		    stmt2.setString(1, emp_id);
+		    ResultSet rs2=stmt2.executeQuery();
+		    String emp_name="";
+		    String manager_id="";
+		    if(rs2.first()){
+		    rs2.first();
+		    emp_name=(rs2.getString("name"));
+		    manager_id=(rs2.getString("manager_id"));
+		    }
+		    //rs2=null;
 		    //PrintWriter out=response.getWriter();
 		    //out.println(empname + " " +temp);
-		    
+		    if(manager_id.equals(emploginId)){
 		    array_task.add(task_name);
 		    array_emp.add(emp_name);
-		    array_empid.add(emp_id+"");
+		    array_empid.add(emp_id+"");}
 		    //Response the Things here 
+		    //rs1.beforeFirst();   
+		    //rs2.beforeFirst();   
 		}
 	}
 	catch(Exception e)
@@ -91,7 +108,7 @@ public class HighPriorityJobs extends HttpServlet {
 			{
 			 divContent = divContent+ " <div class=\"list-group\">"
 			 		+ "<i class=\"fa fa-comment fa-fw\"></i> "+
-"<a href=\"taskdetails.jsp?taskid="+task_id+"\" >"			 + "<p id=>"+task_id+"</p>" +"  "+ array_task.get(i) + " </a> "
+"<a href=\"taskdetails.jsp?taskid="+task_id+"\" >"			 + array_task.get(i) + " </a> "
 			 		+" <span class=\"pull-right text-muted small\"><em> "
 					+ "<a href=\"Empdashboard.jsp?empid="+array_empid.get(i)+"\" > " +array_emp.get(i)+"<\\a> "+
 					 " </em></span></div> ";
