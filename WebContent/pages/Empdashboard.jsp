@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="vz.hackathon.logic.EmployeeInfo"%>
 <%@page import="vz.hackathon.helper.Identifier"%>
 <html lang="en">
 
@@ -36,7 +37,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif] -->
-
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript"
     src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script>
@@ -129,8 +131,9 @@
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
   		        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="index.html" ><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
+                        
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -165,8 +168,39 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <% MorrisPopulator pMorris=new MorrisPopulator(); 
+ Identifier identy=new Identifier();
+ 	String asd=request.getParameter("empid");
+ 	String id;
+ 	if(asd==null)
+ 		id=session.getAttribute("emp_id").toString();
+ 	else
+ 		{
+ 		id=request.getParameter("empid"); 
+ 		}
+ 		%>
+ 		
             <div class="row">
-            
+             <div class="col-lg-3" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-info  fa-fw"></i> My Info
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" id="employeeDetails">
+                            <% EmployeeInfo einfo=new EmployeeInfo(); %>
+                            <% out.print(einfo.myInfo(id)); %>
+                       
+                          	
+                                   <!-- list tasks -->
+                            
+                            <!-- /.list-group -->
+                       </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+                    <!-- /.panel .chat-panel -->
+                </div>
                         <div class="row">
                 <div class="col-lg-3">
 
@@ -177,27 +211,17 @@
                                    <div id="show">
             </div>
  </div>
- <% MorrisPopulator pMorris=new MorrisPopulator(); 
- Identifier identy=new Identifier();
- 	String asd="";
- 	String id;
- 	if(asd.equals(""))
- 		id=identy.getId(); 
- 	else
- 		{asd=request.getParameter("empid");
- 		id=asd;
- 		}
- 		%>
  
-                        <div class="panel-body" id="donut">
+ 
+                        <div class="panel-body" id="donut" >
                         <script type="text/javascript">
                         $(function() {
-						var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(id) %>';
-                    	var taskProgress='<%=pMorris.morrisDataTaskPending(id) %>';
-                    	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(id) %>';
-                    	var taskFailed='<%=pMorris.morrisDataTaskFailed(id) %>';
+                        	var taskCompleted= '<%=pMorris.morrisDataTaskCompleted(id,"emp_id") %>';
+                        	var taskProgress='<%=pMorris.morrisDataTaskPending(id,"emp_id") %>';
+                        	var taskReassigned='<%=pMorris.morrisDataTaskReassigned(id,"emp_id") %>';
+                        	var taskFailed='<%=pMorris.morrisDataTaskFailed(id,"emp_id") %>';
                     	Morris.Donut({
-                            element: 'morris-donut-chart',
+                            element: 'morris-donut-chart-emp',
                             data: [{
                                 label: "Tasks Completed",
                                 value: taskCompleted
@@ -217,44 +241,17 @@
                         
                         </script>
                         
-                            <div id="morris-donut-chart"></div>
+                            <div id="morris-donut-chart-emp"></div>
 						                         
                         </div>
                         <!-- /.panel-body -->
                     </div>
 
-                        <div class="panel-body" hidden="hidden">
-                            <div id="morris-area-chart"></div>
-                        </div>
+                        
 
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4" >
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> High Priority Tasks
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" id="priority_tasks">
-                            
-                        <% HighPriorityJobs hpj=new HighPriorityJobs();  	%>
-                          	<script>
-                          	alert('ello');
-                          	var a='<%=hpj.find()%>';
-                          	
-                            alert(a);
-                           document.getElementById("priority_tasks").innerHTML=a;
-                          	</script>  
-                          	
-                                   <!-- list tasks -->
-                            
-                            <!-- /.list-group -->
-                       </div>
-                        <!-- /.panel-body -->
-                    </div>
-
-                    <!-- /.panel .chat-panel -->
-                </div>
+               
                 <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
@@ -264,8 +261,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

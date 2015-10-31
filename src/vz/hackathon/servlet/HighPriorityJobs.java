@@ -45,9 +45,9 @@ public class HighPriorityJobs extends HttpServlet {
      return array_task;	
     }
     Identifier id = new Identifier();
-    public String find()
+    public String find(String empid)
     {
-    	String emploginId=id.getId();
+    	String emploginId=empid;
     	String task_id="";
 		try
 		{
@@ -110,7 +110,7 @@ public class HighPriorityJobs extends HttpServlet {
 			 		+ "<i class=\"fa fa-comment fa-fw\"></i> "+
 "<a href=\"http://localhost:8080/hackathon/pages/taskdetails.jsp?pw=500&amp;ph=300&amp;taskid="+task_id+"\" class=\"default_popup\">"			 + array_task.get(i) + " </a> "
 			 		+" <span class=\"pull-right text-muted small\"><em> "
-					+ "<a href=\"http://localhost:8080/hackathon/pages/dashboard.jsp?pw=500&amp;ph=300&amp;empid="+array_empid.get(i)+"\" class=\"default_popup\"> " +array_emp.get(i)+"<\\a> "+
+					+ "<a href=\"http://localhost:8080/hackathon/pages/Empdashboard.jsp?pw=800&amp;ph=500&amp;empid="+array_empid.get(i)+"\" class=\"default_popup\"> " +array_emp.get(i)+"<\\a> "+
 					 " </em></span></div> ";
 			 i++;
 			}
