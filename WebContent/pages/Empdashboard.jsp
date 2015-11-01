@@ -377,25 +377,49 @@
     <script src="../js/populate.js"></script>
     
     <!--  Script for updating task  -->
+    <% String strata =request.getParameter("strata");
+    String ids=request.getParameter("id"); 
+    	String taskid=request.getParameter("taskid");
+    		System.out.println(taskid+"fucker");
+    		System.out.println(strata);
+    %>
 	<script type="text/javascript">
-	function complete(taskid,id){
+	function complete(taskid,id,strata){
 		alert (taskid);
-		alert (id);
-		<% String task="<script>document.writeln(taskid);</script>";
-		String eid="<script>document.writeln(id);</script>";
-		einfo.complete(task, eid); %>
+		alert (strata);
+		window.location = "Empdashboard.jsp?taskid="+taskid+"&amp;id="+id+"&amp;strata="+strata;
 
-
+		<%
+		System.out.print("dsdsad");
+		
+		if(strata!=null){
+		if(request.getParameter("strata").equals("0")){
+		String task=request.getParameter("taskid");
+		String eid=request.getParameter("id");
+		einfo.complete(task, eid); 
+		}
+		}
+		%>
+		window.location = "Empdashboard.jsp";
+		
 
 	}
-	function elevate(taskid,id){
+	function elevate(taskid,id,stat){
 		alert ('E');
-		<% String tasks="<script>document.writeln(taskid);</script>";
+		window.location = "Empdashboard.jsp?taskid="+taskid+"&amp;id="+id+"&amp;strata="+strata;
+		<% 
+		if(strata!=null){
+		if(strata.equals("1")){
+		String tasks="<script>document.writeln(taskid);</script>";
 		String eids="<script>document.writeln(id);</script>";
-		einfo.elevate(tasks, eids); %>
-		
+		einfo.elevate(tasks, eids); 
+		}
+		}
+		%>
+		window.location = "Empdashboard.jsp"; 
 	}
 	</script>
+
 
 
 </body>

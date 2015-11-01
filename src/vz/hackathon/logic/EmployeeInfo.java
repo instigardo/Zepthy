@@ -73,8 +73,8 @@ public class EmployeeInfo {
                 +"<td>"+priority+"</td>"
                 +"<td>"+hoursReq+"</td>"
                 +"<td>"+status+"</td>"
-                +"<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+") \"><i class=\"fa fa-check\"></i></button>"
-                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" onclick=\"elevate("+taskId+","+id+") \">Elevate</i></button></td>"
+                +"<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
+                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1') \">Elevate</i></button></td>"
             +"</tr>";
 
     		}
@@ -82,13 +82,13 @@ public class EmployeeInfo {
     	return ret;
 	}
 	public int complete(String taskId, String id){
-		help.UPDATE("bucket", "status=C", "task_id="+taskId +"and emp_id="+id);
+		help.UPDATE("bucket", "status='C'", "task_id="+taskId +"and emp_id="+id);
 		
 		return 0;
 	}
 
 	public int elevate(String taskId, String id){
-		help.UPDATE("bucket", "status=E", "task_id="+taskId+"and emp_id="+id);
+		help.UPDATE("bucket", "status='E'", "task_id="+taskId+"and emp_id="+id);
 		
 		return 0;
 	}
