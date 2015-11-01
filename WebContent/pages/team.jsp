@@ -198,30 +198,28 @@
                   <!-- /.dropdown -->
               </ul>
               <!-- /.navbar-top-links -->
-  
-              <div class="navbar-default sidebar" role="navigation">
-                  <div class="sidebar-nav navbar-collapse">
-                      <ul class="nav" id="side-menu">
-                         <!-- <li class="sidebar-search">
-                              <div class="input-group custom-search-form">
-                                  <input type="text" class="form-control" placeholder="Search...">
-                                  <span class="input-group-btn">
-                                  <button class="btn btn-default" type="button">
-                                      <i class="fa fa-search"></i>
-                                  </button>
-                              </span>
-                              </div>
-                              <!-- /input-group --
-                          </li> -->
-                          <li>
-                              <a href="dashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                          </li>
-                          <li>
-                              <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
-                          </li>
-                          <li>
-                              <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
-                          </li>
+ <% int num=0; 
+	SQLHelper help=new SQLHelper();
+	
+	ResultSet rs43=help.SELECT("reassign", "count(*)", "manager_id="+session.getAttribute("emp_id").toString());
+	if(rs43.next())
+	num=rs43.getInt("count(*)");
+%>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li> 
+                            <a href="dashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
+                        </li>
+                        <li>
+                            <a href="reassign.jsp"><i class="fa fa-edit fa-fw"></i> Reassign Tasks [<% out.print(num); %>]</p></a>
+                        </li>
+                        <li>
+                            <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
+                        </li>
                       </ul>
                   </div>
                   <!-- /.sidebar-collapse -->
@@ -315,4 +313,3 @@
   </body>
   
   </html>
-
