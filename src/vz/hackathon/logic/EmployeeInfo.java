@@ -22,7 +22,7 @@ public class EmployeeInfo {
 		
 			info="<table><tr><td>Employee Name:</td><td> "+empName+"</td></tr>"
 				+"<tr><td>Employee Id:</td><td> "+empId+"</td></tr>"
-				+"<tr><td>Manager Name:</td><td> "+empId+"</td></tr></table>"
+				+"<tr><td>Manager Name:</td><td> "+managerName+"</td></tr></table>"
 				
 				;
 		return info;

@@ -1,5 +1,6 @@
   <!DOCTYPE html>
-  <%@page import="java.io.PrintWriter"%>
+  <%@page import="javax.naming.spi.DirStateFactory.Result"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="vz.hackathon.helper.SQLHelper"%>
   <%@page import="vz.hackathon.logic.TeamView"%>
@@ -26,17 +27,24 @@
     System.out.println("Connection Successful!");
     Statement stmt = conn.createStatement();
     Statement stmt2 = conn.createStatement();
-    ResultSet rs=stmt.executeQuery("select name from employee where manager_id = " + emp_id);
+    Statement stmt3 = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+    ResultSet rs=stmt.executeQuery("select name,emp_id from employee where manager_id = " + emp_id);
     
    
     
     ArrayList<String> emps=new ArrayList<String>();
+    ArrayList<String> empids=new ArrayList<String>();
+    ArrayList<Integer> tasks=new ArrayList<Integer>();
     String emp_name="";
     while(rs.next())
     {	
-
+    	
     	emp_name=rs.getString("name");
-    	emps.add(emp_name);	
+    	emps.add(emp_name);
+    	empids.add(rs.getString("emp_id"));
+    	ResultSet rstask=stmt3.executeQuery("select count(task_id) as cnt from bucket where emp_id = '" + rs.getString("emp_id")+"'");
+    	if(rstask.first())
+    		tasks.add(rstask.getInt("cnt"));
     }
   	
     ResultSet rs2=stmt2.executeQuery("select name from employee where emp_id = " + emp_id);
@@ -56,8 +64,11 @@
        	    	"<li style=\"list-style: none;\">"
        +" <div class=\"panel panel-default\">"
         +" <div class=\"panel-heading\">"
-       +  "     <i class=\"fa-fw\"></i>"+  emps.get(i)
-        + " </div>"
+       +  "     <i class=\"fa-fw\"></i>"
+       +"<table><tr><td width=\"300px\">"
+        + "<a href=\"http://localhost:8080/hackathon/pages/Empdashboard.jsp?pw=800&amp;ph=600&amp;empid="+empids.get(i)+"\" class=\"default_popup\"> " +emps.get(i) 
+        +"</td><td width=\"300px\"><a href=\"http://localhost:8080/hackathon/pages/taskdetails.jsp?pw=800&amp;ph=600&amp;taskid="+tasks.get(i)+"\" class=\"default_popup\"> Tasks Alloted: " +tasks.get(i) 
+        + " </td></tr></table></div>"
        + "</div>"
          +"  </li>";
    	  }
@@ -70,6 +81,8 @@
 
   	divTag.innerHTML=<%= divContent %>;
   	</script>
+  <!-- popup css -->
+	<link href="../dist/css/popup.css" rel="stylesheet">
   
   
       <!-- Bootstrap Core CSS -->
@@ -258,6 +271,46 @@
   
      <!-- Custom Theme JavaScript -->
     <script src="../js/populate.js"></script>
+    
+    <!-- popup scripts -->
+ 	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
+	<script src="../js/jquery.popup.js"></script>
+	<script>
+		$(function(){
+
+			/*-------------------------------
+
+				GENERAL EXAMPLES
+
+			-------------------------------*/
+
+			// Default usage
+			$('.default_popup').popup();
+
+
+
+		});
+
+		/*---------------------
+
+			JQUERY EASING
+
+		*/
+
+		$.extend($.easing, {
+			easeOutBack: function (x, t, b, c, d, s) {
+				if (s == undefined) s = 1.70158;
+				return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+			},
+			easeInBack: function (x, t, b, c, d, s) {
+				if (s == undefined) s = 1.70158;
+				return c*(t/=d)*t*((s+1)*t - s) + b;
+			}
+		});
+
+
+
+	</script>
   
   </body>
   

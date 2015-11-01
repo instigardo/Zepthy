@@ -149,7 +149,7 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
+            <!-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
@@ -163,12 +163,12 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
+                
+            </div> -->
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="margin: 0 0 0 0">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
@@ -180,16 +180,24 @@
  Identifier identy=new Identifier();
  	String asd=request.getParameter("empid");
  	String id;
+ 	boolean popup=false;
  	if(asd==null)
  		id=session.getAttribute("emp_id").toString();
  	else
  		{
  		id=request.getParameter("empid"); 
- 		}
+ 		popup=true;%>
+ 		<script type="text/javascript">
+ 		  
+ 		
+ 		</script>
+ 	<% 	}
  		%>
  		
+ 		
+ 		
             <div class="row">
-             <div class="col-lg-3"  style="float: left;">
+             <div class="col-lg-3" id="info"  style="float: left;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-info  fa-fw"></i> My Info
@@ -206,13 +214,13 @@
                        </div>
                         <!-- /.panel-body -->
                     </div>
-
+ <div id="rowy"></div>
                     <!-- /.panel .chat-panel --
                 </div>
 
                                 <!-- pie  --
                 
-                <div class="col-lg-3" style="float: left;">
+                <div class="col-sm-6" style="float: left;">
 
                     <!-- /.panel -->
                     <div class="panel panel-default">
@@ -261,18 +269,18 @@
 
                 </div>
                 <!-- /.pie  -->
-               
+               <div id="rowy1"></div>
                 <!-- Employee task table -->
                 
-                                <div class="col-lg-9" style="float: right;">
+                                <div class="col-lg-9" id="mytask" style="float: right; " hidden>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                            My Tasks
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                                     <thead>
                                         <tr>
                                             <th>Task Name</th>
@@ -302,7 +310,20 @@
                     <!-- /.panel -->
                 </div>
                 
-                
+                <% if(popup)
+                {
+                	%>
+                	<script type="text/javascript">
+         			var div=document.getElementById("mytask").hidden = "hidden";
+         			document.getElementById("info").className = "col-lg-12 col-sm-12";  
+         		//	var div=document.getElementById("rowy").innerHTML="fucker</div>";
+         		//var div=document.getElementById("rowy1").innerHTML="fucker</div> <div class=\"col-sm-6\" style=\"float: left;">";
+         			//
+         			
+         			//
+         		</script>
+               <% }
+                	%>
                 
                 
                 <!--  /.Employee task table -->
