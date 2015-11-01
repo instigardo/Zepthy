@@ -272,7 +272,7 @@
                <div id="rowy1"></div>
                 <!-- Employee task table -->
                 
-                                <div class="col-lg-9" id="mytask" style="float: right; " hidden>
+                                <div class="col-lg-9" id="mytask" style="float: right; " >
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             My Tasks
@@ -375,6 +375,28 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../js/populate.js"></script>
+    
+    <!--  Script for updating task  -->
+	<script type="text/javascript">
+	function complete(taskid,id){
+		alert (taskid);
+		alert (id);
+		<% String task="<script>document.writeln(taskid);</script>";
+		String eid="<script>document.writeln(id);</script>";
+		einfo.complete(task, eid); %>
+
+
+
+	}
+	function elevate(taskid,id){
+		alert ('E');
+		<% String tasks="<script>document.writeln(taskid);</script>";
+		String eids="<script>document.writeln(id);</script>";
+		einfo.elevate(tasks, eids); %>
+		
+	}
+	</script>
+
 
 </body>
 
