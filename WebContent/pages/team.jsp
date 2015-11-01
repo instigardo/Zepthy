@@ -67,7 +67,7 @@
        +  "     <i class=\"fa-fw\"></i>"
        +"<table><tr><td width=\"300px\">"
         + "<a href=\"http://localhost:8080/hackathon/pages/Empdashboard.jsp?pw=800&amp;ph=600&amp;empid="+empids.get(i)+"\" class=\"default_popup\"> " +emps.get(i) 
-        +"</td><td width=\"300px\"><a href=\"http://localhost:8080/hackathon/pages/taskdetails.jsp?pw=800&amp;ph=600&amp;taskid="+tasks.get(i)+"\" class=\"default_popup\"> Tasks Alloted: " +tasks.get(i) 
+        +"</td><td width=\"300px\"><a href=\"http://localhost:8080/hackathon/pages/taskdetails.jsp?pw=800&amp;ph=600&amp;taskid="+tasks.get(i)+"&amp;empid="+empids.get(i)+"\" class=\"default_popup\"> Tasks Alloted: " +tasks.get(i) 
         + " </td></tr></table></div>"
        + "</div>"
          +"  </li>";
