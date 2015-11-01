@@ -183,7 +183,7 @@
                                 <!-- Employee task table -->
                 <% EmployeeInfo einfo= new EmployeeInfo(); 
                 Reassign rinfo=new Reassign();
-                	String id=request.getParameter("empid");
+                	String id=session.getAttribute("emp_id").toString();
                 %>
                   <div class="col-lg-12" id="mytask" style="float: right; " >
                     <div class="panel panel-default">

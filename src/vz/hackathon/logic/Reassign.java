@@ -10,16 +10,16 @@ public class Reassign {
 	public String reassign(String id) throws SQLException{
 			String taskId="";
 			String name="";
-			Date created;
-			Date deadline;
-			int hoursReq=0;
-			int priority=0;
+			String created;
+			String deadline;
+			String hoursReq;
+			String priority;
 			String stat;
 			String status="";
 			String ret="";
-			
+
 	    	SQLHelper help=new SQLHelper();
-	    	ResultSet rsbucket=help.SELECT("reassign a, bucket b", "a.*,b.emp_id", "a.task_id=b.task_id&amp;emp_id="+id);
+	    	ResultSet rsbucket=help.SELECT("reassign a, bucket b", "a.*,b.manager_id", "a.task_id=b.task_id and b.manager_id="+id);
 	    	while(rsbucket.next()){
 	    		taskId=rsbucket.getString("task_id");
 	    		stat=rsbucket.getString("status");
@@ -33,15 +33,17 @@ public class Reassign {
 	    		break;
 	    		case "F":status="Failed";
 	    		break;
+	    		case "E":status="Elevated";
+	    		break;
 	    			
 	    		}   		
 	    				
 	    		
 	    			name=rsbucket.getString("name");
-	    			created=rsbucket.getDate("date_created");
-	    			deadline=rsbucket.getDate("deadline");
-	    			hoursReq=rsbucket.getInt("hours_needed");
-	    			priority=rsbucket.getInt("priority");
+	    			created=rsbucket.getString("create_date");
+	    			deadline=rsbucket.getString("deadline_date");
+	    			hoursReq=rsbucket.getString("hours");
+	    			priority=rsbucket.getString("priority");
 	    			
 	                ret+="<tr>"
 	                +"<td>"+name+"</td>"
@@ -50,7 +52,7 @@ public class Reassign {
 	                +"<td>"+deadline+"</td>"
 	                +"<td>"+priority+"</td>"
 	                +"<td>"+hoursReq+"</td>"
-	                +"<td>"+status+"</td>";
+	                +"<td>"+stat+"</td>";
 	                  ret+="</tr>";
 	    	}
 	    	

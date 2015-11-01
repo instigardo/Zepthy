@@ -38,8 +38,11 @@ public class EmployeeInfo {
 		String stat;
 		String status="";
 		String ret="";
-		
+		String manager="";
     	SQLHelper help=new SQLHelper();
+    	ResultSet rsman=help.SELECT("employee", "manager_id", "emp_id="+id);
+    	rsman.next();
+    	manager=rsman.getString("manager_id");
     	ResultSet rsbucket=help.SELECT("bucket", "task_id,status", "emp_id="+id);
     	while(rsbucket.next()){
     		taskId=rsbucket.getString("task_id");
@@ -66,37 +69,37 @@ public class EmployeeInfo {
     			hoursReq=rstask.getInt("hours_needed");
     			priority=rstask.getInt("priority");
     			
+    			
                 ret+="<tr>"
                 +"<td>"+name+"</td>"
                 +"<td>"+taskId+"</td>"
                 +"<td>"+created+"</td>"
                 +"<td>"+deadline+"</td>"
-                +"<td>"+priority+"</td>"
+                                         +"<td>"+priority+"</td>"
                 +"<td>"+hoursReq+"</td>"
                 +"<td>"+status+"</td>";
                 
                 if(redirect.equals("empdash")){
                 	if(stat.equals("P")&&created.before(deadline)){
                 con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                 }
                 	else if(stat.equals("P")&&created.equals(deadline)){
                 		help.UPDATE("bucket", "status='F'", "task_id="+taskId +"and emp_id="+id);
                 		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                 	}
                 	else{
                 		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+name+") \">Elevate</i></button></td>";
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                             
                 	}
                 }
                 else if(redirect.equals("taskdetails")){
                 	if(stat.equals("P")){
-                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Revoke</i></button></td>";
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Revoke</i></button></td>";
                         }
                 	else{
-                		con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+hoursReq+") \">Revoke</i></button></td>";
                                     	}
                 }
                 		

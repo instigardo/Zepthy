@@ -91,7 +91,7 @@ public class SQLHelper {
 		}
 
 		String s = "select " + cName + " from " + tName + " where " + where;
-		//System.out.println(s);
+		System.out.println(s);
 		try {
 			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs1 = st.executeQuery(s);

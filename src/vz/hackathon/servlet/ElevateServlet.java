@@ -33,20 +33,21 @@ public class ElevateServlet extends HttpServlet {
 		String empid_id=request.getParameter("server_emp_id");
 		String status=request.getParameter("server_task_status");
 		String name=request.getParameter("server_task_name");
-		String created_date=request.getParameter("server_task_create_date");
-		String deadline_date=request.getParameter("server_task_deadline_date");
+		String created_date=request.getParameter("server_create_date");
+		String deadline_date=request.getParameter("server_deadline_date");
 		String priority=request.getParameter("server_priority");
 		String hour=request.getParameter("server_hour");
+		String manager=request.getParameter("server_manager");
 		SQLHelper help=new SQLHelper();
-		help.INSERT("reassign", "'"+name+"',"+task_id+",'"+created_date+"','"+deadline_date+"',"+priority+","+hour+","+status);
+		help.INSERT("reassign", "'"+name+"',"+task_id+",'"+created_date+"','"+deadline_date+"','"+priority+"','"+hour+"','"+status+"','"+manager+"'");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		doGet(request, response);
+//	}
 
 }

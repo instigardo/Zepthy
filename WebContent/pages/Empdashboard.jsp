@@ -299,8 +299,8 @@
                                     </thead>
                                     <tbody>
                                     <% 
-                                    //String prnt=einfo.task(id,"empdash");
-                                    	//out.print(prnt);
+                                    String prnt=einfo.task(id,"empdash");
+                                    	out.print(prnt);
                                     	
                                     %>
                                     </tbody>
@@ -389,8 +389,8 @@
     %>
 	<script type="text/javascript">
 	function complete(taskid,id,strata){
-		alert (taskid);
-		alert (strata);
+		//alert (taskid);
+		//alert (strata);
 		window.location = "Empdashboard.jsp?taskid="+taskid+"&amp;id="+id+"&amp;strata="+strata;
 
 		<%
@@ -408,8 +408,9 @@
 		
 
 	}
-	function elevate(taskid,id,stat,create_date,deadline_date,priority,name,hour)
+	function elevate(taskid,id,stat,create_date,deadline_date,priority,name,hour,manager)
 		{
+		
 		$.ajax({
 		    type: "POST",
 		    url: "../ElevateServlet",
@@ -421,11 +422,12 @@
 		    	server_deadline_date:deadline_date,
 		    	server_priority:priority,
 		    	server_task_name:name,
-		    	server_hour:hour
+		    	server_hour:hour,
+		    	server_manager:manager
 		    },
 		    success: function(data) {
 		    	alert("Elevated");
-		        
+		    	
 		        $('#results').html(data);
 		    }
 		});
