@@ -59,6 +59,10 @@
                 }, 3000);
             });
 </script>
+<!-- Elevate Task AJAX codde -->
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 
 </head>
 
@@ -295,8 +299,8 @@
                                     </thead>
                                     <tbody>
                                     <% 
-                                    String prnt=einfo.task(id,"empdash");
-                                    	out.print(prnt);
+                                    //String prnt=einfo.task(id,"empdash");
+                                    	//out.print(prnt);
                                     	
                                     %>
                                     </tbody>
@@ -404,19 +408,27 @@
 		
 
 	}
-	function elevate(taskid,id,stat){
-		alert ('E');
-		window.location = "Empdashboard.jsp?taskid="+taskid+"&amp;id="+id+"&amp;strata="+strata;
-		<% 
-		if(strata!=null){
-		if(strata.equals("1")){
-		String tasks="<script>document.writeln(taskid);</script>";
-		String eids="<script>document.writeln(id);</script>";
-		einfo.elevate(tasks, eids); 
-		}
-		}
-		%>
-		window.location = "Empdashboard.jsp"; 
+	function elevate(taskid,id,stat,create_date,deadline_date,priority,name,hour)
+		{
+		$.ajax({
+		    type: "POST",
+		    url: "../ElevateServlet",
+		    data:{
+		    	server_task_id:taskid,
+		    	server_emp_id:id,
+		    	server_task_status:stat,
+		    	server_create_date:create_date,
+		    	server_deadline_date:deadline_date,
+		    	server_priority:priority,
+		    	server_task_name:name,
+		    	server_hour:hour
+		    },
+		    success: function(data) {
+		    	alert("Elevated");
+		        
+		        $('#results').html(data);
+		    }
+		});
 	}
 	</script>
 
@@ -425,4 +437,5 @@
 </body>
 
 </html>
+
 

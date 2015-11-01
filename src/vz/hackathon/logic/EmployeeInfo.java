@@ -87,7 +87,7 @@ public class EmployeeInfo {
                 	}
                 	else{
                 		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+name+") \">Elevate</i></button></td>";
                             
                 	}
                 }
@@ -96,7 +96,7 @@ public class EmployeeInfo {
                         con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Revoke</i></button></td>";
                         }
                 	else{
-                		con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Revoke</i></button></td>";
+                		con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+hoursReq+") \">Revoke</i></button></td>";
                                     	}
                 }
                 		
@@ -123,3 +123,4 @@ public class EmployeeInfo {
 
 	
 }
+

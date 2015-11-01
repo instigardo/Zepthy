@@ -15,7 +15,7 @@ public class SQLHelper {
 	public SQLHelper() {
 		ConnectionGetter cg = new ConnectionGetter();
 		con = cg.getConnection();
-		//System.out.println(con);
+		System.out.println(con);
 	}
 
 	public boolean EXEC_bill_details(String pName, String accno, String billInput, String billGen, double billAmt, String dateTS, String P1, String P2) {

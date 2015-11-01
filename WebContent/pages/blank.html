@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	<!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
@@ -352,7 +353,7 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a class="active" href="blank.html">Blank Page</a>
+                                    <a class="active" href="blank.html">Blank Page </a>
                                 </li>
                                 <li>
                                     <a href="login.html">Login Page</a>
@@ -366,13 +367,15 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+		
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Blank</h1>
+                        <p id="pp"></p>
+                        <input id="clickme" type="button" />
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -384,9 +387,22 @@
 
     </div>
     <!-- /#wrapper -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+        $.ajax({
+            type: "GET",
+            url: "CurrencyConverter",
+            data:{
+            	a:
+            },
+            success: function(data) {
+                $('#results').show();
+                $('#results').html(data);
+            }
+        });
+        </script>
 
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
