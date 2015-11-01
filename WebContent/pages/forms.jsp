@@ -260,19 +260,59 @@ else if(x=="automatic")
 	divContent2='<label>Skillset Required</label>'
 +        '<div class="checkbox">'
  +   '<label>'
-  +      '<input type="checkbox" name="skill" value="Mobile">Mobile'
+  +      '<input type="checkbox" name="skill1" value="Mobile">Mobile'
   +  '</label>'
 +'</div>'
 +'<div class="checkbox">'
  +   '<label>'
- +    '   <input type="checkbox" name="skill" value="FIOS">FIOS TV'
+ +    '   <input type="checkbox" name="skill2" value="FIOS">FIOS TV'
  +   '</label>'
 +'</div>'
 +'<div class="checkbox">'
  +'   <label>'
- + '      <input type="checkbox" name="skill" value="4G">4G'
+ + '      <input type="checkbox" name="skill3" value="4G">4G'
  + '  </label>'
-+'</div>';
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill4" value="Mobile">Devops'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill5" value="Mobile">Javascript'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill6" value="Java">Java'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill7" value="Teradata">Teradata'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill8" value="ASP.NET">ASP.NET'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill9" value="HTML">HTML'
+ +  '</label>'
++'</div>'+
+'<div class="checkbox">'
++   '<label>'
+ +      '<input type="checkbox" name="skill10" value="CSS">CSS'
+ +  '</label>'
++'</div>'
+
+
+
+
+;
 }
 divTag.innerHTML=divContent;
 divTag2.innerHTML=divContent2;
