@@ -40,6 +40,7 @@ public class EmployeeInfo {
 		String ret="";
 		String manager="";
     	SQLHelper help=new SQLHelper();
+    	
     	ResultSet rsman=help.SELECT("employee", "manager_id", "emp_id="+id);
     	rsman.next();
     	manager=rsman.getString("manager_id");
@@ -61,7 +62,7 @@ public class EmployeeInfo {
     			
     		}
     		String con="";
-    				
+    		
     		ResultSet rstask=help.SELECT("task", "*", "task_id="+taskId);
     		if(rstask.first()){
     			name=rstask.getString("name");
@@ -105,6 +106,8 @@ public class EmployeeInfo {
 
                                     	}
                 }
+                
+                	
                 		
                 
                 
@@ -125,6 +128,48 @@ public class EmployeeInfo {
 		help.UPDATE("bucket", "status='E'", "task_id="+taskId+"and emp_id="+id);
 		
 		return 0;
+	}
+	
+	public String highPriority(String id) throws SQLException{
+		String taskId="";
+		String name="";
+		Date created;
+		Date deadline;
+		int hoursReq=0;
+		int priority=0;
+		
+		String status="";
+		String ret="";
+		String manager="";
+    	String con;
+    	String stat="P";
+		
+		ResultSet rstask=help.SELECT("task", "*", "task_id="+id);
+		if(rstask.first()){
+			name=rstask.getString("name");
+			taskId=rstask.getString("task_id");
+			created=rstask.getDate("date_created");
+			deadline=rstask.getDate("deadline");
+			hoursReq=rstask.getInt("hours_needed");
+			priority=rstask.getInt("priority");
+			
+			
+			
+			
+            ret+="<tr>"
+            +"<td>"+name+"</td>"
+            +"<td>"+taskId+"</td>"
+            +"<td>"+created+"</td>"
+            +"<td>"+deadline+"</td>"
+            +"<td>"+priority+"</td>"
+            +"<td>"+hoursReq+"</td>"
+            +"<td>In Progress</td></tr>";
+            
+           
+		
+		
+	}
+		return ret;
 	}
 
 	

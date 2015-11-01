@@ -66,8 +66,9 @@ public class HighPriorityJobs extends HttpServlet {
 	    	// 	Class.forName("oracle.jdbc.driver.OracleDriver");
 		    //Connection conn1 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","pass");
 		    
-		    PreparedStatement stmt1 = conn.prepareStatement("select emp_id from bucket where task_id=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		    PreparedStatement stmt1 = conn.prepareStatement("select emp_id from bucket where task_id=? and status=?",ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
 		    stmt1.setString(1, task_id);
+		    stmt1.setString(2, "P");
 		    ResultSet rs1=stmt1.executeQuery();
 		    String emp_id="";
 		    if(rs1.first()){

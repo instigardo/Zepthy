@@ -173,7 +173,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Blank</h1>
+                        <h1 class="page-header">Task Details</h1>
                  </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -181,7 +181,14 @@
                 <div class="row">
                                 <!-- Employee task table -->
                 <% EmployeeInfo einfo= new EmployeeInfo(); 
-                	String id=request.getParameter("empid");
+                String id="";
+                String tsk="";
+                if(request.getParameter("empid")!=null)
+                {	id=request.getParameter("empid");
+                System.out.println(id);
+                }
+                else
+                	tsk=request.getParameter("taskid");
                 %>
                   <div class="col-lg-12" id="mytask" style="float: right; " >
                     <div class="panel panel-default">
@@ -201,13 +208,20 @@
                                             <th>Priority</th>
                                             <th>Hours Recommended / week</th>
                                              <th>Task Status</th>
+                                             <%if(request.getParameter("empid")!=null){ %>
                                             <th>Revoke Task</th>
+                                            <% } %>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <% 
+                                    if(request.getParameter("empid")!=null){
                                     String prnt=einfo.task(id,"taskdetails");
-                                    	out.print(prnt);
+                                    	out.print(prnt);}
+                                    else{
+                                    	 String prnt=einfo.highPriority(tsk);
+                                     	out.print(prnt);}
+                                    
                                     	
                                     %>
                                     </tbody>
