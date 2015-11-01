@@ -28,7 +28,7 @@ public class EmployeeInfo {
 		return info;
 	}
 	
-	public String task(String id) throws SQLException{
+	public String task(String id,String redirect) throws SQLException{
 		String taskId="";
 		String name="";
 		Date created;
@@ -56,7 +56,8 @@ public class EmployeeInfo {
     		break;
     			
     		}
-    		
+    		String con="";
+    				
     		ResultSet rstask=help.SELECT("task", "*", "task_id="+taskId);
     		if(rstask.first()){
     			name=rstask.getString("name");
@@ -72,10 +73,37 @@ public class EmployeeInfo {
                 +"<td>"+deadline+"</td>"
                 +"<td>"+priority+"</td>"
                 +"<td>"+hoursReq+"</td>"
-                +"<td>"+status+"</td>"
-                +"<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1') \">Elevate</i></button></td>"
-            +"</tr>";
+                +"<td>"+status+"</td>";
+                
+                if(redirect.equals("empdash")){
+                	if(stat.equals("P")&&created.before(deadline)){
+                con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
+                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                }
+                	else if(stat.equals("P")&&created.equals(deadline)){
+                		help.UPDATE("bucket", "status='F'", "task_id="+taskId +"and emp_id="+id);
+                		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                	}
+                	else{
+                		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Elevate</i></button></td>";
+                            
+                	}
+                }
+                else if(redirect.equals("taskdetails")){
+                	if(stat.equals("P")){
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Revoke</i></button></td>";
+                        }
+                	else{
+                		con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1',"+created+","+deadline+","+priority+","+") \">Revoke</i></button></td>";
+                                    	}
+                }
+                		
+                
+                
+                    
+                    ret+=con+"</tr>";
 
     		}
 	}
