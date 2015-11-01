@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<%@page import="vz.hackathon.helper.SQLHelper"%>
 <%@page import="vz.hackathon.servlet.taskCreate"%>
+<%@page import="java.sql.*"%>
 <html lang="en">
 
 <head>

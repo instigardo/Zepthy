@@ -412,7 +412,7 @@
 		{
 		
 		$.ajax({
-		    type: "POST",
+		    type: "GET",
 		    url: "../ElevateServlet",
 		    data:{
 		    	server_task_id:taskid,

@@ -29,6 +29,7 @@ public class ElevateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("hgfhgfhs");
 		String task_id=request.getParameter("server_task_id");
 		String empid_id=request.getParameter("server_emp_id");
 		String status=request.getParameter("server_task_status");
@@ -39,7 +40,8 @@ public class ElevateServlet extends HttpServlet {
 		String hour=request.getParameter("server_hour");
 		String manager=request.getParameter("server_manager");
 		SQLHelper help=new SQLHelper();
-		help.INSERT("reassign", "'"+name+"',"+task_id+",'"+created_date+"','"+deadline_date+"','"+priority+"','"+hour+"','"+status+"','"+manager+"'");
+		help.INSERT("reassign", "'"+name+"',"+task_id+",'"+created_date+"','"+deadline_date+"','"+priority+"','"+hour+"','E','"+manager+"'");
+		help.UPDATE("bucket", "status=\"E\"", "task_id="+task_id+" and emp_id="+empid_id);
 	}
 
 	/**

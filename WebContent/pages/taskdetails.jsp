@@ -246,6 +246,34 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+    
+    	<script type="text/javascript">
+
+	function elevate(taskid,id,stat,create_date,deadline_date,priority,name,hour,manager)
+		{
+		
+		$.ajax({
+		    type: "GET",
+		    url: "../ElevateServlet",
+		    data:{
+		    	server_task_id:taskid,
+		    	server_emp_id:id,
+		    	server_task_status:stat,
+		    	server_create_date:create_date,
+		    	server_deadline_date:deadline_date,
+		    	server_priority:priority,
+		    	server_task_name:name,
+		    	server_hour:hour,
+		    	server_manager:manager
+		    },
+		    success: function(data) {
+		    	alert("Elevated");
+		    	
+		        $('#results').html(data);
+		    }
+		});
+	}
+	</script>
 
 </body>
 

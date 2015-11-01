@@ -57,6 +57,7 @@ public class EmployeeInfo {
     		break;
     		case "F":status="Failed";
     		break;
+    		default: status="Elevated";
     			
     		}
     		String con="";
@@ -75,31 +76,33 @@ public class EmployeeInfo {
                 +"<td>"+taskId+"</td>"
                 +"<td>"+created+"</td>"
                 +"<td>"+deadline+"</td>"
-                                         +"<td>"+priority+"</td>"
+                +"<td>"+priority+"</td>"
                 +"<td>"+hoursReq+"</td>"
                 +"<td>"+status+"</td>";
                 
                 if(redirect.equals("empdash")){
                 	if(stat.equals("P")&&created.before(deadline)){
                 con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
+                    +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                 }
                 	else if(stat.equals("P")&&created.equals(deadline)){
                 		help.UPDATE("bucket", "status='F'", "task_id="+taskId +"and emp_id="+id);
                 		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                 	}
                 	else{
                 		con="<td style=\"text-align: center;\"><button type=\"button\" class=\"btn btn-default btn btn-success disabled\"  title=\"Mark Completed\" onclick=\"complete("+taskId+","+id+",'0') \"><i class=\"fa fa-check\"></i></button>"
-                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
+                                +" &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Elevate</i></button></td>";
                             
                 	}
                 }
                 else if(redirect.equals("taskdetails")){
                 	if(stat.equals("P")){
-                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'1','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Revoke</i></button></td>";
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Revoke</i></button></td>";
                         }
                 	else{
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"','"+manager+"') \">Revoke</i></button></td>";
+
                                     	}
                 }
                 		
