@@ -60,10 +60,11 @@ public class taskServlet extends HttpServlet {
 		String assignment=request.getParameter("assignment");
 		String assignee=request.getParameter("assignee");
 		String concerns=request.getParameter("concerns");
-		String skill=request.getParameter("skill");
+		String skill=request.getParameter("skill1")+","+request.getParameter("skill2")+","+request.getParameter("skill3")+","+request.getParameter("skill4")+","+request.getParameter("skill5")+","
+				+request.getParameter("skill6")+","+request.getParameter("skill7")+","+request.getParameter("skill8")+","+request.getParameter("skill9")+","+request.getParameter("skill10")+",";
 		String hours=request.getParameter("hours");
 		String priority=request.getParameter("priority");
-		sqlhelp.INSERT("task", "'"+ taskName+"',"+"MY_NUMBER_SN.nextval"+",'"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
+		sqlhelp.INSERT("task", "'"+ taskName+"',"+"my_number_sn.nextval"+",'"+taskDesc+"',CURRENT_TIMESTAMP(0)"+",'"+datered+"','"+concerns+"','"+skill+"','"+hours+"','"+priority+"'" );
 		ResultSet rs=sqlhelp.query("select task_id from task order by date_created desc");
 		try {
 				rs.next();
@@ -75,7 +76,7 @@ public class taskServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(assignment.equals("automatic")){
-			System.out.println("id");
+			System.out.println(id);
 			
 			TaskManagement.automateManagement(id,concerns,skill,hours,priority,dated,datered, session.getAttribute("emp_id").toString());
 		}
@@ -93,3 +94,4 @@ public class taskServlet extends HttpServlet {
 	}
 
 }
+
