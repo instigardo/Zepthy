@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <%@page import="vz.hackathon.logic.Reassign"%>
-<%@page import="vz.hackathon.helper.SQLHelper"%>
 <%@page import="vz.hackathon.logic.EmployeeInfo"%>
+<%@page import="vz.hackathon.helper.SQLHelper"%>
 <%@page import="vz.hackathon.helper.Identifier"%>
+<%@page import="javax.websocket.Session"%>
+<%@page import="java.sql.*"%>
+
 <html lang="en">
 
 <head>
@@ -14,7 +17,8 @@
     <meta name="author" content="">
 
     <title>Zepthy</title>
-
+<!-- popup css -->
+	<link href="../dist/css/popup.css" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,13 +27,6 @@
 
     <!-- Timeline CSS -->
     <link href="../dist/css/timeline.css" rel="stylesheet">
-    
-        <!-- DataTables CSS -->
-    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-    
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -46,6 +43,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif] -->
+
+
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript"
@@ -63,7 +62,7 @@
 
 </head>
 
-<body>
+<body >
 
     <div id="wrapper" >
 
@@ -142,15 +141,20 @@
   		        <li class="divider"></li>
                         <li><a href="index.html" ><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
-                        
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
-            <!-- <div class="navbar-default sidebar" role="navigation">
+<% int num=0; 
+	SQLHelper help=new SQLHelper();
+	
+	ResultSet rs=help.SELECT("reassign", "count(*)", "manager_id="+session.getAttribute("emp_id").toString());
+	if(rs.next())
+	num=rs.getInt("count(*)");
+%>
+            <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
@@ -160,17 +164,20 @@
                             <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Create Task</a>
+                            <a href="reassign.jsp"><i class="fa fa-edit fa-fw"></i> Reassign Tasks [<% out.print(num); %>]</p></a>
+                        </li>
+                        <li>
+                            <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
                         </li>
                     </ul>
                 </div>
-                
-            </div> -->
+                <!-- /.sidebar-collapse -->
+            </div>
             <!-- /.navbar-static-side -->
         </nav>
 
         <!-- Page Content -->
-        <div id="page-wrapper" style="margin: 0 0 0 0">
+        <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -249,6 +256,28 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+    
+    <script type="text/javascript">
+	function reassign(taskid)
+	{
+	
+	$.ajax({
+	    type: "GET",
+	    url: "../ReassignServlet",
+	    data:{
+	    	server_task_id:taskid,
+	    	
+	    },
+	    success: function(data) {
+	    	alert("Reassigned");
+	    	
+	        $('#results').html(data);
+	    }
+	});
+}
+    
+    
+    </script>
 
 </body>
 

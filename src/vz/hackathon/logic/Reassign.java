@@ -55,10 +55,10 @@ String con="";
 	                +"<td>"+stat+"</td>";
 	                
 	                if(stat.equals("E")){
-                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"') \">Reassign</i></button></td>";
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"reassign("+taskId+") \">Reassign</i></button></td>";
                         }
                 	else{
-                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"') \">Reassign</i></button></td>";
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"reassign("+taskId+") \">Reassign</i></button></td>";
 
                                     	}
 	                
