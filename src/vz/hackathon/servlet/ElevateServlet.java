@@ -41,7 +41,7 @@ public class ElevateServlet extends HttpServlet {
 		String manager=request.getParameter("server_manager");
 		SQLHelper help=new SQLHelper();
 		help.INSERT("reassign", "'"+name+"',"+task_id+",'"+created_date+"','"+deadline_date+"','"+priority+"','"+hour+"','E','"+manager+"'");
-		help.UPDATE("bucket", "status=\"E\"", "task_id="+task_id+" and emp_id="+empid_id);
+		help.UPDATE("bucket", "status='E'", "task_id="+task_id+" and emp_id="+empid_id);
 	}
 
 	/**

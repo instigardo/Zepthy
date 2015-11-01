@@ -17,7 +17,7 @@ public class Reassign {
 			String stat;
 			String status="";
 			String ret="";
-
+String con="";
 	    	SQLHelper help=new SQLHelper();
 	    	ResultSet rsbucket=help.SELECT("reassign a, bucket b", "a.*,b.manager_id", "a.task_id=b.task_id and b.manager_id="+id);
 	    	while(rsbucket.next()){
@@ -53,7 +53,16 @@ public class Reassign {
 	                +"<td>"+priority+"</td>"
 	                +"<td>"+hoursReq+"</td>"
 	                +"<td>"+stat+"</td>";
-	                  ret+="</tr>";
+	                
+	                if(stat.equals("E")){
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"') \">Reassign</i></button></td>";
+                        }
+                	else{
+                        con="<td style=\"text-align: center;\"> &nbsp;<button type=\"button\" class=\"btn btn-primary btn btn-success disabled\" id=\""+taskId+"\" onclick=\"elevate("+taskId+","+id+",'"+stat+"','"+created.toString()+"','"+deadline.toString()+"','"+priority+"','"+hoursReq+"','"+name+"') \">Reassign</i></button></td>";
+
+                                    	}
+	                
+	                  ret+=con+"</tr>";
 	    	}
 	    	
 	    		

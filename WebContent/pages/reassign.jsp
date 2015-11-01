@@ -203,6 +203,7 @@
                                             <th>Priority</th>
                                             <th>Hours Recommended / week</th>
                                              <th>Task Status</th>
+                                             <th>Reassign</th>
                                             
                                         </tr>
                                     </thead>
