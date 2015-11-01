@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+<%@page import="vz.hackathon.helper.SQLHelper"%>
 <%@page import="vz.hackathon.helper.Identifier"%>
 <%@page import="javax.websocket.Session"%>
+<%@page import="java.sql.*"%>
+
 <html lang="en">
 
 <head>
@@ -142,7 +145,13 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
+<% int num=0; 
+	SQLHelper help=new SQLHelper();
+	
+	ResultSet rs=help.SELECT("reassign", "count(*)", "manager_id="+session.getAttribute("emp_id").toString());
+	if(rs.next())
+	num=rs.getInt("count(*)");
+%>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -151,6 +160,9 @@
                         </li>
                         <li>
                             <a href="team.jsp"><i class="fa fa-dashboard fa-fw"></i> Team View</a>
+                        </li>
+                        <li>
+                            <a href="reassign.jsp"><i class="fa fa-edit fa-fw"></i> Reassign Tasks [<% out.print(num); %>]</p></a>
                         </li>
                         <li>
                             <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Create Task</a>
