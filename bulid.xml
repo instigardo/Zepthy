@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<project name="BillingSystem" default="all" basedir=".">
+<project name="Zepthy" default="all" basedir=".">
 	<property environment="env"/>
 	<property file="build.properties" />
 	
 	<target name="info">
-		<echo>Jenkins Demo  - Welcome to Apache Ant!</echo>
+		<echo>Travis Build</echo>
 	</target>
 	<target name="clean" description="Clean output directories">
 		<delete>
