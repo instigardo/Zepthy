@@ -7,7 +7,9 @@
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
   <property name="test"  location="test"/>
+  <property name="lib.dir"  location="${web.dir}/WEB-INF/lib"/>
   <property name="junit" location="/WebContent/WEB-INF/lib/junit.jar"/>
+
 
   <path id="classpath.test">
     <pathelement location="${junit}" />
@@ -29,6 +31,10 @@
       <classpath>
 	<pathelement location="${junit}"/>
       </classpath>
+      <fileset dir="${lib.dir}">
+	<include name="*.jar" />
+	</fileset>
+
     </javac>
   </target>
 
